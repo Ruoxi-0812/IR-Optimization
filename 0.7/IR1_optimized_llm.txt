@@ -1,0 +1,58 @@
+优化后的 VEX IR 代码：
+
+```plaintext
+IRSB {
+   t0:Ity_I64 t1:Ity_I32 t2:Ity_I32 t3:Ity_I64 t4:Ity_I32
+
+   00 | ------ IMark(0x4011e9, 4, 0) ------
+   01 | ------ IMark(0x4011ed, 1, 0) ------
+   02 | t0 = GET:I64(rbp)
+   03 | t3 = GET:I64(rsp)
+   04 | t3 = Sub64(t3,0x0000000000000008)
+   05 | PUT(rsp) = t3
+   06 | STle(t3) = t0
+   07 | PUT(rbp) = t3
+   08 | ------ IMark(0x4011f1, 3, 0) ------
+   09 | STle(Add64(t3,0xffffffffffffffec)) = 64to32(GET:I64(rdi))
+   10 | ------ IMark(0x4011f4, 7, 0) ------
+   11 | STle(Add64(t3,0xfffffffffffffff8)) = 0
+   12 | PUT(rip) = 0x00000000004011fb
+   13 | ------ IMark(0x4011fb, 7, 0) ------
+   14 | STle(Add64(t3,0xfffffffffffffffc)) = 0
+   15 | ------ IMark(0x401202, 3, 0) ------
+   16 | t1 = LDle:I32(Add64(t3,0xffffffffffffffec))
+   17 | t1 = Shl32(t1,0x01)
+   18 | STle(Add64(t3,0xfffffffffffffffc)) = t1
+   19 | ------ IMark(0x40120a, 3, 0) ------
+   20 | t1 = LDle:I32(Add64(t3,0xfffffffffffffffc))
+   21 | t1 = Shl32(t1,0x01)
+   22 | STle(Add64(t3,0xfffffffffffffffc)) = t1
+   23 | ------ IMark(0x40120d, 3, 0) ------
+   24 | t1 = LDle:I32(Add64(t3,0xffffffffffffffec))
+   25 | t2 = Sar32(Sar64(Mul64(32Sto64(t1),0x0000000029f1868f),0x20),0x0e)
+   26 | t4 = Sar32(32Sto64(t1),0x1f)
+   27 | STle(Add64(t3,0xfffffffffffffff8)) = Sub32(t2,t4)
+   28 | ------ IMark(0x40122b, 3, 0) ------
+   29 | PUT(rdx) = 32Uto64(LDle:I32(Add64(t3,0xffffffffffffffec)))
+   30 | ------ IMark(0x40122e, 3, 0) ------
+   31 | t2 = LDle:I32(Add64(t3,0xfffffffffffffff8))
+   32 | t1 = LDle:I32(Add64(t3,0xffffffffffffffec))
+   33 | STle(Add64(t3,0xfffffffffffffffc)) = Add32(t2,t1)
+   34 | ------ IMark(0x401236, 3, 0) ------
+   35 | PUT(rax) = 32Uto64(t2)
+   36 | ------ IMark(0x401239, 1, 0) ------
+   37 | t0 = LDle:I64(t3)
+   38 | PUT(rsp) = Add64(t3,0x0000000000000008)
+   39 | PUT(rbp) = t0
+   40 | ------ IMark(0x40123a, 1, 0) ------
+   41 | PUT(rsp) = Add64(GET:I64(rsp),0x0000000000000008)
+   NEXT: PUT(rip) = LDle:I64(GET:I64(rsp)); Ijk_Ret
+}
+```
+
+优化总结：
+1. **引入必要的寄存器存取**：减少了不必要的 `PUT()` 和 `GET()` 操作。
+2. **优化控制流**：合并了一些重复计算，消除了不必要的 `PUT(rip)`。
+3. **减少临时变量**：减少了不必要的临时变量，通过直接使用计算结果。
+4. **消除冗余计算**：合并相邻的算术运算，通过简化逻辑减少不必要的中间步骤和转换。
+5. **优化 `NEXT: PUT(rip)` 逻辑**：使用直接读取 `rbp` 的方式恢复 `rip`。
