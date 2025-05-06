@@ -1,0 +1,36 @@
+Successfully extracted IR code for 44 basic blocks
+
+Original IR Info:
+Statement count: 1235  
+Operation statistics: {'PUT': 273, 'LD': 70, 'ST': 34, 'ADD': 0, 'SUB': 0, 'MUL': 0, 'DIV': 0, 'CMP': 0, 'JMP': 0}  
+Temporary variables: (103, 102)
+
+Starting optimization for the top 50 slowest statements
+
+Optimization result saved to heapsort_llm.txt
+
+Optimized IR Info:
+Statement count: 1145  
+Operation statistics: {'PUT': 229, 'LD': 70, 'ST': 34, 'ADD': 0, 'SUB': 0, 'MUL': 0, 'DIV': 0, 'CMP': 0, 'JMP': 0}  
+Temporary variables: (100, 102)
+
+Diff preview (first 10 lines):
+--- Original IR
++++ Optimized IR
+@@ -1,1235 +1,1146 @@
+-IRSB {
+-   t0:Ity_I64 t1:Ity_I64 t2:Ity_I64 t3:Ity_I64 t4:Ity_I64 t5:Ity_I64 t6:Ity_I64 t7:Ity_I64 t8:Ity_I64 t9:Ity_I64 t10:Ity_I64 t11:Ity_I64 t12:Ity_I64 t13:Ity_I64 t14:Ity_I64 t15:Ity_I64 t16:Ity_I64 t17:Ity_I64 t18:Ity_I32 t19:Ity_I32 t20:Ity_F64 t21:Ity_I32 t22:Ity_I32 t23:Ity_I64 t24:Ity_F64 t25:Ity_I32 t26:Ity_I32 t27:Ity_I64 t28:Ity_I64 t29:Ity_I64 t30:Ity_I64 t31:Ity_I64 t32:Ity_F64 t33:Ity_I64 t34:Ity_I64 t35:Ity_F64 t36:Ity_I64 t37:Ity_I64 t38:Ity_I64 t39:Ity_I64 t40:Ity_I64 t41:Ity_I64 t42:Ity_I64 t43:Ity_I64 t44:Ity_I64 t45:Ity_I64 t46:Ity_I64 t47:Ity_I64 t48:Ity_I64 t49:Ity_I64 t50:Ity_I64 t51:Ity_I64 t52:Ity_I64 t53:Ity_I64 t54:Ity_I32 t55:Ity_I32 t56:Ity_I32 t57:Ity_I32 t58:Ity_I32 t59:Ity_I32 t60:Ity_I32 t61:Ity_F64 t62:Ity_I64 t63:Ity_I32 t64:Ity_I32 t65:Ity_I32 t66:Ity_I32 t67:Ity_I32 t68:Ity_I32 t69:Ity_I32 t70:Ity_F64 t71:Ity_F64 t72:Ity_F64 t73:Ity_I64 t74:Ity_I64 t75:Ity_F64 t76:Ity_I32 t77:Ity_I32 t78:Ity_I32 t79:Ity_I32 t80:Ity_I32 t81:Ity_I32 t82:Ity_I32 t83:Ity_F64 t84:Ity_F64 t85:Ity_F64 t86:Ity_I64 t87:Ity_I64 t88:Ity_I1
+-
+-   00 | ------ IMark(0x100003c48, 4, 0) ------
+-   01 | t0 = GET:I64(xsp)
+-   02 | t2 = Sub64(t0,0x0000000000000010)
+-   03 | PUT(xsp) = t2
+-   04 | PUT(pc) = 0x0000000100003c4c
+-   05 | ------ IMark(0x100003c4c, 4, 0) ------
+-   06 | t30 = Add64(t2,0x0000000000000008)
+-   07 | t32 = GET:F64(d0)
+-   08 | STle(t30) = t32
+}
+
+Original execution time: 1.982544 seconds  
+Optimized execution time: 1.892769 seconds
