@@ -1,0 +1,36 @@
+Successfully extracted IR code for 66 basic blocks
+
+Original IR Info:
+Statement count: 1445
+Operation statistics: {'PUT': 319, 'LD': 70, 'ST': 49, 'ADD': 0, 'SUB': 0, 'MUL': 0, 'DIV': 0, 'CMP': 0, 'JMP': 0}
+Temporary variables: (87, 86)
+
+Starting optimization for the top 50 slowest statements
+
+Optimization result saved to objinst_llm.txt
+
+Optimized IR Info:
+Statement count: 1312
+Operation statistics: {'PUT': 253, 'LD': 70, 'ST': 49, 'ADD': 0, 'SUB': 0, 'MUL': 0, 'DIV': 0, 'CMP': 0, 'JMP': 0}
+Temporary variables: (87, 86)
+
+Diff preview (first 10 lines):
+--- Original IR
++++ Optimized IR
+@@ -1,1445 +1,1313 @@
+-IRSB {
+-   t0:Ity_I64 t1:Ity_I64 t2:Ity_I64 t3:Ity_I64 t4:Ity_I64 t5:Ity_I64 t6:Ity_I64 t7:Ity_I64 t8:Ity_I64 t9:Ity_I64 t10:Ity_I64 t11:Ity_I64 t12:Ity_I64 t13:Ity_I64 t14:Ity_I64 t15:Ity_I32 t16:Ity_I8 t17:Ity_I64 t18:Ity_I64 t19:Ity_I64 t20:Ity_I64
+-
+-   00 | ------ IMark(0x100003b84, 4, 0) ------
+-   01 | t0 = GET:I64(xsp)
+-   02 | t2 = Sub64(t0,0x0000000000000010)
+-   03 | PUT(xsp) = t2
+-   04 | PUT(pc) = 0x0000000100003b88
+-   05 | ------ IMark(0x100003b88, 4, 0) ------
+-   06 | t9 = Add64(t2,0x0000000000000008)
+-   07 | t11 = GET:I64(x0)
+-   08 | STle(t9) = t11
+}
+
+Original execution time: 3.550671 seconds  
+Optimized execution time: 3.474999 seconds

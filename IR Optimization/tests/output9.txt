@@ -1,0 +1,36 @@
+Successfully extracted IR code for 87 basic blocks
+
+Original IR Info:
+Statement count: 2143  
+Operation statistics: {'PUT': 531, 'LD': 92, 'ST': 68, 'ADD': 0, 'SUB': 0, 'MUL': 0, 'DIV': 0, 'CMP': 0, 'JMP': 0}  
+Temporary variables: (94, 93)
+
+Starting optimization for the top 50 slowest statements
+
+Optimization result saved to bigprog_llm.txt
+
+Optimized IR Info:
+Statement count: 1968  
+Operation statistics: {'PUT': 446, 'LD': 92, 'ST': 68, 'ADD': 0, 'SUB': 0, 'MUL': 0, 'DIV': 0, 'CMP': 0, 'JMP': 0}  
+Temporary variables: (91, 93)
+
+Diff preview (first 10 lines):
+--- Original IR
++++ Optimized IR
+@@ -1,2143 +1,1969 @@
+-IRSB {
+-   t0:Ity_I64 t1:Ity_I64 t2:Ity_I64 t3:Ity_I64 t4:Ity_I64 t5:Ity_I64 t6:Ity_I64 t7:Ity_I64 t8:Ity_I64 t9:Ity_I64 t10:Ity_I64 t11:Ity_I64 t12:Ity_I64 t13:Ity_I64 t14:Ity_I64 t15:Ity_I32 t16:Ity_I32 t17:Ity_I32 t18:Ity_I32 t19:Ity_I64 t20:Ity_I64 t21:Ity_I64 t22:Ity_I64 t23:Ity_I64 t24:Ity_I64 t25:Ity_I64 t26:Ity_I64 t27:Ity_I64 t28:Ity_I64 t29:Ity_I64 t30:Ity_I64 t31:Ity_I64 t32:Ity_I64 t33:Ity_I64 t34:Ity_I32 t35:Ity_I64 t36:Ity_I32 t37:Ity_I64 t38:Ity_I64 t39:Ity_I64 t40:Ity_I1 t41:Ity_I64 t42:Ity_I64 t43:Ity_I64 t44:Ity_I64 t45:Ity_I64 t46:Ity_I64 t47:Ity_I64 t48:Ity_I32 t49:Ity_I32 t50:Ity_I64 t51:Ity_I64 t52:Ity_I64 t53:Ity_I1 t54:Ity_I32 t55:Ity_I32 t56:Ity_I1
+-
+-   00 | ------ IMark(0x100003994, 4, 0) ------
+-   01 | t0 = GET:I64(xsp)
+-   02 | t1 = Add64(t0,0xffffffffffffffd0)
+-   03 | PUT(xsp) = t1
+-   04 | t23 = GET:I64(x22)
+-   05 | STle(t1) = t23
+-   06 | t24 = Add64(t1,0x0000000000000008)
+-   07 | t25 = GET:I64(x21)
+-   08 | STle(t24) = t25
+}
+
+Original execution time: 4.408243 seconds  
+Optimized execution time: 4.375356 seconds
